@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - Tailoring Website</title>
+    <link rel="icon" type="image/png" href="membership.png" />
+    <link rel="stylesheet" href="register.css" />
+</head>
+
+<body>
+
+    <div class="register-wrapper">
+        <div class="register-box">
+            <h2>Create Your Account</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" id="firstName" placeholder="Enter first name" required />
+                </div>
+                <div class="form-group">
+                    <label>Middle Name</label>
+                    <input type="text" id="middleName" placeholder="Enter middle name" />
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" id="lastName" placeholder="Enter last name" required />
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phone" pattern="[0-9]{10}" placeholder="10-digit number" required />
+                </div>
+                <div class="form-group">
+                    <label>Email (Gmail only)</label>
+                    <input type="email" id="email" placeholder="example@gmail.com" required />
+                </div>
+                <div class="form-group">
+                    <label>New Password (6 digits)</label>
+                    <input type="password" id="newPassword" pattern="\d{6}" placeholder="Enter new password" required />
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Re-enter password" required />
+                </div>
+                <button type="submit" class="register-btn">Register</button>
+                <p id="message" class="message"></p>
+            </form>
+            <p class="login-link">Already have an account? <a href="welcome.html">Login here</a></p>
+        </div>
+    </div>
+
+    <script>
+        /* REGISTER PAGE SCRIPT
+                                           - Keeps your existing validations (Gmail-only, 6-digit password)
+                                           - Saves registeredUser to localStorage
+                                           - Ensures no auto-login by removing any previous loggedIn flag
+                                        */
+
+        document.getElementById("registerForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+            const passwordPattern = /^\d{6}$/;
+
+            const email = document.getElementById("email").value.trim();
+            const newPassword = document.getElementById("newPassword").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            const message = document.getElementById("message");
+
+            if (!emailPattern.test(email)) {
+                message.textContent = "Email must be a valid Gmail address.";
+                message.style.color = "yellow";
+                return;
+            }
+            if (!passwordPattern.test(newPassword)) {
+                message.textContent = "Password must be exactly 6 digits.";
+                message.style.color = "yellow";
+                return;
+            }
+            if (newPassword !== confirmPassword) {
+                message.textContent = "Passwords do not match.";
+                message.style.color = "yellow";
+                return;
+            }
+
+            const userData = {
+                firstName: document.getElementById("firstName").value,
+                middleName: document.getElementById("middleName").value,
+                lastName: document.getElementById("lastName").value,
+                phone: document.getElementById("phone").value,
+                email,
+                password: newPassword
+            };
+
+            // Save user, and ensure we DON'T auto-login
+            localStorage.setItem("registeredUser", JSON.stringify(userData));
+            sessionStorage.removeItem("loggedIn"); // ensure user is not logged in automatically
+
+            message.textContent = "Registration successful! Redirecting to Login...";
+            message.style.color = "lightgreen";
+            setTimeout(() => {
+                window.location.href = "welcome.html";
+            }, 1400);
+        });
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,155 @@
+/* Reset and base styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+
+/* Layout */
+
+.container {
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+
+/* Card Styling */
+
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Typography */
+
+.card h1 {
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 24px;
+    color: #fff;
+}
+
+
+/* Inputs and Labels */
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #e0e0e0;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.input-group input:focus {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+
+/* Button */
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff9800;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #e68a00;
+}
+
+
+/* Message */
+
+.message {
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
+
+/* Back to login */
+
+.back-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.back-link a {
+    color: #ffd54f;
+    text-decoration: none;
+    transition: text-decoration 0.2s;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
+
+
+/* Responsive */
+
+@media (max-width: 480px) {
+    .card {
+        padding: 20px;
+    }
+    .card h1 {
+        font-size: 20px;
+    }
+}

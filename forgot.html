@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reset Password | Tailoring Hub</title>
+    <link rel="stylesheet" href="forgot.css" />
+    <link rel="icon" type="image/png" href="forgot-password.png" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Reset Password</h1>
+            <form id="forgotForm" novalidate>
+                <div class="input-group">
+                    <label for="identifier">Registered Gmail</label>
+                    <input type="email" id="identifier" placeholder="you@gmail.com" required />
+                </div>
+
+                <div class="input-group">
+                    <label for="newPassword">New Password (6 digits)</label>
+                    <input type="password" id="newPassword" placeholder="123456" pattern="\d{6}" required />
+                </div>
+
+                <div class="input-group">
+                    <label for="confirmPassword">Confirm New Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Re-enter password" required />
+                </div>
+
+                <button type="submit" class="btn">Reset Password</button>
+                <p id="message" class="message"></p>
+            </form>
+
+            <p class="back-link">
+                <a href="welcome.html">← Back to Login</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("forgotForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById("identifier").value.trim();
+            const newPassword = document.getElementById("newPassword").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            const message = document.getElementById("message");
+
+            const storedUser = JSON.parse(localStorage.getItem("registeredUser"));
+
+            if (!storedUser) {
+                message.textContent = "No registered user found.";
+                message.style.color = "#ffeb3b";
+                return;
+            }
+
+            const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+            if (!gmailRegex.test(email)) {
+                message.textContent = "Only Gmail addresses are allowed.";
+                message.style.color = "#ffeb3b";
+                return;
+            }
+
+            if (email !== storedUser.email) {
+                message.textContent = "Email does not match our records.";
+                message.style.color = "#ffeb3b";
+                return;
+            }
+
+            if (!/^\d{6}$/.test(newPassword)) {
+                message.textContent = "Password must be exactly 6 digits.";
+                message.style.color = "#ffeb3b";
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                message.textContent = "Passwords do not match.";
+                message.style.color = "#ffeb3b";
+                return;
+            }
+
+            storedUser.password = newPassword;
+            localStorage.setItem("registeredUser", JSON.stringify(storedUser));
+            sessionStorage.removeItem("loggedIn");
+
+            message.textContent = "Password reset successful! Redirecting...";
+            message.style.color = "#4caf50";
+
+            setTimeout(() => {
+                window.location.href = "welcome.html";
+            }, 1500);
+        });
+    </script>
+</body>
+
+</html>

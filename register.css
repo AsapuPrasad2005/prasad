@@ -1,0 +1,158 @@
+/* Page Background */
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #3a6186, #89253e);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+/* Fade-in animation */
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Center Box */
+
+.register-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.register-box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    padding: 30px;
+    border-radius: 15px;
+    width: 350px;
+    color: white;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    animation: fadeInUp 1s ease;
+}
+
+
+/* Heading */
+
+.register-box h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #f3f3f3;
+}
+
+
+/* Form Groups */
+
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+    color: #e0e0e0;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+/* Input Focus Effect */
+
+input:focus {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.02);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+
+/* Button */
+
+.register-btn {
+    width: 100%;
+    padding: 10px;
+    background: #ff9800;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.register-btn:hover {
+    background: #e68a00;
+    transform: scale(1.05);
+    box-shadow: 0 0 12px rgba(255, 152, 0, 0.7);
+}
+
+
+/* Message Text (Animated slide in) */
+
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message {
+    margin-top: 10px;
+    font-weight: bold;
+    animation: slideDown 0.4s ease;
+}
+
+
+/* Login Link */
+
+.login-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: #ffd54f;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+    color: #fff176;
+}

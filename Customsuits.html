@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Custom Suits</title>
+    <link rel="stylesheet" href="customsuits.css" />
+</head>
+
+<body>
+    <!-- Logout Button -->
+    <button id="logoutBtn" class="logout-btn">Logout</button>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Custom-made Suits</h1>
+            <p>
+                Experience elegance with our handcrafted suits designed exclusively for you. Select your fabric, style, and fit — we’ll bring your dream suit to life.
+            </p>
+            <div class="hero-buttons">
+                <button class="btn primary" onclick="window.location.href='order.html'">Order Now</button>
+                <button class="btn secondary" onclick="window.location.href='next.html'">Back to Services</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <h2>Our Creations</h2>
+        <div class="image-gallery">
+            <img src="Customsuits.jpeg" alt="Custom Suit" />
+            <img src="Customsuits2.jpeg" alt="Custom Suit Design 2" />
+            <img src="Customsuits3.jpeg" alt="Custom Suit Design 3" />
+        </div>
+    </section>
+
+    <script>
+        if (sessionStorage.getItem("loggedIn") !== "true") {
+            window.location.href = "welcome.html";
+        }
+
+        history.pushState(null, null, location.href);
+        window.onpopstate = function() {
+            history.go(1);
+        };
+
+        document.getElementById("logoutBtn").addEventListener("click", function() {
+            sessionStorage.removeItem("loggedIn");
+            window.location.href = "welcome.html#home-section";
+        });
+    </script>
+</body>
+
+</html>

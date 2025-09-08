@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>User Profile - Tailoring Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="next.css" />
+</head>
+
+<body>
+    <!-- Logout Button -->
+    <button id="logoutBtn" class="logout-btn">Logout</button>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <button id="profileToggleBtn" class="profile-toggle-btn">Your Profile</button>
+        <div id="profileCard" class="profile-card hidden">
+
+            <p>
+                <strong>Full Name:</strong>
+                <span id="fullName"></span>
+                <input type="text" id="editFullName" class="edit-input hidden" />
+            </p>
+
+            <p>
+                <strong>Email (Gmail):</strong>
+                <span id="email"></span>
+                <input type="email" id="editEmail" class="edit-input hidden" />
+            </p>
+
+            <p>
+                <strong>Phone Number:</strong>
+                <span id="phone"></span>
+                <input type="tel" id="editPhone" class="edit-input hidden" />
+            </p>
+
+            <div class="profile-actions">
+                <button id="editProfileBtn" class="edit-btn">Edit</button>
+                <button id="saveProfileBtn" class="save-btn hidden">Save</button>
+                <button id="cancelEditBtn" class="cancel-btn hidden">Cancel</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Tailored Elegance</h1>
+            <p>Premium tailoring for men, women, and kids – stitched to perfection.</p>
+            <button onclick="window.location.href='order.html'" class="cta-btn">Book Now</button>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <h2>Our Services</h2>
+        <div class="service-cards">
+            <div class="card" onclick="window.location.href='customsuits.html'" style="cursor: pointer;">
+                <img src="Customsuits.jpeg" alt="Custom Suit" />
+                <h3>Custom Suits</h3>
+                <p>Perfectly tailored suits and dresses for every occasion.</p>
+            </div>
+
+            <div class="card">
+                <img src="AlterationWork.jpg" alt="Alteration" />
+                <h3>Alterations</h3>
+                <p>Expert fitting & repairs to give your clothes new life.</p>
+            </div>
+            <div class="card">
+                <img src="DesignerBlouse.jpg" alt="Blouse" />
+                <h3>Designer Blouse</h3>
+                <p>Beautiful blouse & saree stitching with modern patterns.</p>
+            </div>
+            <div class="card">
+                <img src="KidsTailoring.jpg" alt="Kids Tailoring" />
+                <h3>Kids Wear</h3>
+                <p>Stylish tailoring for kids – comfy and classy.</p>
+            </div>
+            <div class="card">
+                <img src="UniformTailoring.jpg" alt="Uniform" />
+                <h3>Uniforms</h3>
+                <p>Professional uniform stitching with neat finishing.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2>Why Choose Us?</h2>
+        <div class="feature-boxes">
+            <div class="feature">
+                <img src="order.png" alt="Order Tracking" />
+                <h4>Order Tracking</h4>
+                <p>Track your orders easily anytime.</p>
+            </div>
+            <div class="feature">
+                <img src="delivery-truck.png" alt="Delivery" />
+                <h4>Fast Delivery</h4>
+                <p>On-time delivery across your city.</p>
+            </div>
+            <div class="feature">
+                <img src="customer.png" alt="Happy Customers" />
+                <h4>Happy Customers</h4>
+                <p>100% satisfaction with every stitch.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Redirect if not logged in
+        if (sessionStorage.getItem("loggedIn") !== "true") {
+            window.location.href = "welcome.html";
+        }
+
+        // Retrieve user data
+        let registeredUser = JSON.parse(localStorage.getItem("registeredUser"));
+
+        function displayUser() {
+            if (registeredUser) {
+                const fullName = [registeredUser.firstName || "", registeredUser.middleName || "", registeredUser.lastName || ""]
+                    .filter(Boolean)
+                    .join(" ");
+                document.getElementById("fullName").textContent = fullName || "N/A";
+                document.getElementById("email").textContent = registeredUser.email || "N/A";
+                document.getElementById("phone").textContent = registeredUser.phone || "N/A";
+            }
+        }
+
+        if (!registeredUser) {
+            alert("User data not found. Please login again.");
+            sessionStorage.removeItem("loggedIn");
+            window.location.href = "welcome.html";
+        } else {
+            displayUser();
+        }
+
+        // Logout
+        document.getElementById("logoutBtn").addEventListener("click", function() {
+            sessionStorage.removeItem("loggedIn");
+            window.location.href = "welcome.html#home-section";
+        });
+
+        // Profile toggle
+        const profileToggleBtn = document.getElementById("profileToggleBtn");
+        const profileCard = document.getElementById("profileCard");
+        profileToggleBtn.addEventListener("click", () => {
+            profileCard.classList.toggle("hidden");
+        });
+
+        // Edit logic
+        const editBtn = document.getElementById("editProfileBtn");
+        const saveBtn = document.getElementById("saveProfileBtn");
+        const cancelBtn = document.getElementById("cancelEditBtn");
+
+        editBtn.addEventListener("click", () => {
+            document.querySelectorAll("span").forEach(el => el.classList.add("hidden"));
+            document.querySelectorAll(".edit-input").forEach(el => el.classList.remove("hidden"));
+
+            // Pre-fill inputs
+            document.getElementById("editFullName").value = [registeredUser.firstName || "", registeredUser.middleName || "", registeredUser.lastName || ""].filter(Boolean).join(" ");
+            document.getElementById("editEmail").value = registeredUser.email || "";
+            document.getElementById("editPhone").value = registeredUser.phone || "";
+
+            editBtn.classList.add("hidden");
+            saveBtn.classList.remove("hidden");
+            cancelBtn.classList.remove("hidden");
+        });
+
+        cancelBtn.addEventListener("click", () => {
+            document.querySelectorAll("span").forEach(el => el.classList.remove("hidden"));
+            document.querySelectorAll(".edit-input").forEach(el => el.classList.add("hidden"));
+
+            editBtn.classList.remove("hidden");
+            saveBtn.classList.add("hidden");
+            cancelBtn.classList.add("hidden");
+        });
+
+        saveBtn.addEventListener("click", () => {
+            const nameParts = document.getElementById("editFullName").value.trim().split(" ");
+            registeredUser.firstName = nameParts[0] || "";
+            registeredUser.middleName = nameParts.length === 3 ? nameParts[1] : "";
+            registeredUser.lastName = nameParts.length >= 2 ? nameParts[nameParts.length - 1] : "";
+            registeredUser.email = document.getElementById("editEmail").value.trim();
+            registeredUser.phone = document.getElementById("editPhone").value.trim();
+
+            localStorage.setItem("registeredUser", JSON.stringify(registeredUser));
+
+            displayUser();
+
+            document.querySelectorAll("span").forEach(el => el.classList.remove("hidden"));
+            document.querySelectorAll(".edit-input").forEach(el => el.classList.add("hidden"));
+
+            editBtn.classList.remove("hidden");
+            saveBtn.classList.add("hidden");
+            cancelBtn.classList.add("hidden");
+
+            alert("Profile updated successfully!");
+        });
+    </script>
+</body>
+
+</html>

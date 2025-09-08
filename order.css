@@ -1,0 +1,123 @@
+/* General Page Style */
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, #e0ecff, #f9faff);
+    color: #222;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Navigation */
+
+nav {
+    background-color: #eaf1ff;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+nav a {
+    color: #4864d9;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    border: 2px solid #4864d9;
+    padding: 8px 16px;
+    border-radius: 30px;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #4864d9;
+    color: white;
+}
+
+
+/* Order Section */
+
+.order-section {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.order-section h1 {
+    text-align: center;
+    color: #2d44a0;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+
+/* Form */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #333;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    background-color: #f9faff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #4864d9;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 4px rgba(72, 100, 217, 0.4);
+}
+
+
+/* Submit Button */
+
+.submit-btn {
+    width: 100%;
+    background-color: #4864d9;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #2f4abf;
+}
+
+
+/* Responsive */
+
+@media (max-width: 500px) {
+    .order-section {
+        margin: 20px;
+        padding: 20px;
+    }
+    .order-section h1 {
+        font-size: 24px;
+    }
+}

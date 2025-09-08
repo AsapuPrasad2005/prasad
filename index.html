@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Tailoring Website</title>
+    <link rel="icon" type="image/png" href="home.png">
+    <link rel="stylesheet" href="index.css">
+
+    <script>
+        // If already logged in, skip to we.html
+        if (sessionStorage.getItem("loggedIn") === "true") {
+            window.location.href = "we.html";
+        }
+
+        // Prevent navigation with back/forward buttons
+        window.history.pushState(null, null, window.location.href);
+        window.onpopstate = function() {
+            window.history.pushState(null, null, window.location.href);
+        };
+
+        // Prevent left/right arrow key navigation
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+                e.preventDefault();
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <!-- Morphing blob background -->
+    <div class="morphing-bg"></div>
+
+    <!-- Dark overlay for readability -->
+    <div class="overlay"></div>
+
+    <!-- Main container -->
+    <div class="container">
+        <h1>👔 Welcome to <span>Trinadha Rao Tailoring</span></h1>
+        <p>Every stitch tells a story of elegance & perfection. Discover our tailoring services crafted just for you.</p>
+
+        <!-- Welcome Button -->
+        <a href="welcome.html" class="enter-btn" onclick="sessionStorage.setItem('visitedWelcome','true')">
+      Enter Website →
+    </a>
+    </div>
+</body>
+
+</html>
